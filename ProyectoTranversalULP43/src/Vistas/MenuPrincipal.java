@@ -26,17 +26,77 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        escritorio = new javax.swing.JPanel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jmAlumno = new javax.swing.JMenu();
+        jmiGestionAlumno = new javax.swing.JMenuItem();
+        jmMateria = new javax.swing.JMenu();
+        jmiFormMateria = new javax.swing.JMenuItem();
+        jmAdministracion = new javax.swing.JMenu();
+        jmiManejoInscripciones = new javax.swing.JMenuItem();
+        jmiManipulacionNotas = new javax.swing.JMenuItem();
+        jmConsultas = new javax.swing.JMenu();
+        jmiAlumnoPorMateria = new javax.swing.JMenuItem();
+        jmSalir = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
+        escritorio.setLayout(escritorioLayout);
+        escritorioLayout.setHorizontalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 849, Short.MAX_VALUE)
+        );
+        escritorioLayout.setVerticalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 553, Short.MAX_VALUE)
+        );
+
+        jmAlumno.setText("Alumno");
+
+        jmiGestionAlumno.setText("Gestion de Alumnos");
+        jmAlumno.add(jmiGestionAlumno);
+
+        jMenuBar1.add(jmAlumno);
+
+        jmMateria.setText("Materia");
+
+        jmiFormMateria.setText("Formulario de Materia");
+        jmMateria.add(jmiFormMateria);
+
+        jMenuBar1.add(jmMateria);
+
+        jmAdministracion.setText("Administracion");
+
+        jmiManejoInscripciones.setText("Manejo de Inscripciones");
+        jmAdministracion.add(jmiManejoInscripciones);
+
+        jmiManipulacionNotas.setText("Manipulacion de notas");
+        jmAdministracion.add(jmiManipulacionNotas);
+
+        jMenuBar1.add(jmAdministracion);
+
+        jmConsultas.setText("Consultas");
+
+        jmiAlumnoPorMateria.setText("Alumnos por Materia");
+        jmConsultas.add(jmiAlumnoPorMateria);
+
+        jMenuBar1.add(jmConsultas);
+
+        jmSalir.setText("Salir");
+        jMenuBar1.add(jmSalir);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -78,5 +138,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel escritorio;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jmAdministracion;
+    private javax.swing.JMenu jmAlumno;
+    private javax.swing.JMenu jmConsultas;
+    private javax.swing.JMenu jmMateria;
+    private javax.swing.JMenu jmSalir;
+    private javax.swing.JMenuItem jmiAlumnoPorMateria;
+    private javax.swing.JMenuItem jmiFormMateria;
+    private javax.swing.JMenuItem jmiGestionAlumno;
+    private javax.swing.JMenuItem jmiManejoInscripciones;
+    private javax.swing.JMenuItem jmiManipulacionNotas;
     // End of variables declaration//GEN-END:variables
 }
