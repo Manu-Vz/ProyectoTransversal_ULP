@@ -5,6 +5,7 @@
 package AccesoADatos;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,7 +62,7 @@ public class AlumnoData {
             if (rs.next()) {
                 
                 alumno=new Alumno();
-                alumno.setIdAlumno(id);
+                alumno.setIdAlumno(rs.getInt("idAlumno"));
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setDni(rs.getInt("dni"));
@@ -95,7 +96,7 @@ public class AlumnoData {
             if (rs.next()) {
                 
                 alumno = new Alumno();
-                alumno.setIdAlumno(rs.getInt("id"));
+                alumno.setIdAlumno(rs.getInt("idAlumno"));
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setDni(rs.getInt("dni"));
@@ -103,12 +104,12 @@ public class AlumnoData {
                 alumno.setEstado(true);
                 
             }else{
-                JOptionPane.showMessageDialog(null, "No existe el alumno");
+                JOptionPane.showMessageDialog(null, "No existe el alumno ");
             }
             ps.close();
 
         } catch (SQLException ex) {
-            Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Error al buscar alumno por dni " +ex.getMessage());
         }
         
         
@@ -118,15 +119,68 @@ public class AlumnoData {
     
     public List<Alumno> listarAlumnos(){
         
-        return null;
+        List<Alumno> alumnos = new ArrayList<>();
+        
+        String sql = "SELECT * FROM alumno WHERE estado = 1";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()){
+                Alumno alumno = new Alumno();
+                alumno.setIdAlumno(rs.getInt("idAlumno"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setApellido(rs.getString("apellido"));
+                alumno.setDni(rs.getInt("dni"));
+                alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
+                alumno.setEstado(rs.getBoolean("estado"));
+                alumnos.add(alumno);
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumnos " + ex.getMessage());
+        }
+    
+        return alumnos;
         
     }
     
     public void modificarAlumno(Alumno alumno){
         
+        String sql = "UPDATE alumno SET dni = ? , apellido = ? , nombre = ? , fechaNacimiento = ? WHERE idAlumno = ?";
+        PreparedStatement ps = null;
+        
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, alumno.getIdAlumno());
+            ps.setString(2, alumno.getNombre());
+            ps.setString(3,alumno.getApellido());
+            ps.setInt(4, alumno.getDni());
+            ps.setDate(5, Date.valueOf(alumno.getFechaNacimiento()));
+            
+                    
+                    
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno " +ex.getMessage());
+        }
     }
     
     public void eliminarAlumno(int id){
+        String sql = "UPDATE alumno SET estado = 0 WHERE idAlumno = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int fila = ps.executeUpdate();
+            
+            if (fila==1) {
+                JOptionPane.showMessageDialog(null, "Alumno eliminado");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumnos " +ex.getMessage());
+        }
         
     }
 }
