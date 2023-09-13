@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Connection;
 import proyectotranversalulp.Entidades.Materia;
@@ -138,15 +136,9 @@ public class MateriaData {
             ps.close();
                        
         } catch (SQLException ex) {
-            Logger.getLogger(MateriaData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la Base de Datos");
         }
         
         return materias;
     }
-    
-    
-   
-        
-        
-    
 }
