@@ -10,22 +10,22 @@ package proyectotranversalulp.Entidades;
  */
 public class Inscripcion {
     private int idInscripto;
-    private int alumno;
-    private int materia;
-    private int nota;
+    private Alumno alumno;
+    private Materia materia;
+    private Double nota;
     private boolean estado;
 
     public Inscripcion() {
     }
 
-    public Inscripcion(int alumno, int materia, int nota, boolean estado) {
+    public Inscripcion(Alumno alumno, Materia materia, Double nota, boolean estado) {
         this.alumno = alumno;
         this.materia = materia;
         this.nota = nota;
         this.estado = estado;
     }
 
-    public Inscripcion(int idInscripto, int alumno, int materia, int nota, boolean estado) {
+    public Inscripcion(int idInscripto, Alumno alumno, Materia materia, Double nota, boolean estado) {
         this.idInscripto = idInscripto;
         this.alumno = alumno;
         this.materia = materia;
@@ -41,27 +41,27 @@ public class Inscripcion {
         this.idInscripto = idInscripto;
     }
 
-    public int getAlumno() {
+    public Alumno getAlumno() {
         return alumno;
     }
 
-    public void setAlumno(int alumno) {
+    public void setAlumno(Alumno alumno) {
         this.alumno = alumno;
     }
 
-    public int getMateria() {
+    public Materia getMateria() {
         return materia;
     }
 
-    public void setMateria(int materia) {
+    public void setMateria(Materia materia) {
         this.materia = materia;
     }
 
-    public int getNota() {
+    public Double getNota() {
         return nota;
     }
 
-    public void setNota(int nota) {
+    public void setNota(Double nota) {
         this.nota = nota;
     }
 
