@@ -47,7 +47,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 952, Short.MAX_VALUE)
+            .addGap(0, 849, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -58,13 +58,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(escritorioLayout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         jmAlumno.setText("Alumno");
@@ -94,6 +92,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmAdministracion.setText("Administracion");
 
         jmiManejoInscripciones.setText("Manejo de Inscripciones");
+        jmiManejoInscripciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiManejoInscripcionesActionPerformed(evt);
+            }
+        });
         jmAdministracion.add(jmiManejoInscripciones);
 
         jmiManipulacionNotas.setText("Manipulacion de notas");
@@ -139,6 +142,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         gestion.setVisible(true);
         escritorio.add(gestion);
     }//GEN-LAST:event_jmiGestionAlumnoActionPerformed
+
+    private void jmiManejoInscripcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiManejoInscripcionesActionPerformed
+        // Enlace a Administracion
+        escritorio.removeAll();
+        escritorio.repaint();
+        ManejoDeInscripciones mI = new ManejoDeInscripciones();
+        mI.setVisible(true);
+        escritorio.add(mI);
+    }//GEN-LAST:event_jmiManejoInscripcionesActionPerformed
 
     /**
      * @param args the command line arguments
