@@ -6,6 +6,7 @@
 
 import org.mariadb.jdbc.Connection;
 import AccesoADatos.Conectar;
+import Vistas.MenuPrincipal;
 
 /**
  *
@@ -18,7 +19,8 @@ public class ProyectoTranversalULP {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Connection con=Conectar.getConectar();
+        MenuPrincipal.main(args);
+        
     }
     
 }

@@ -15,6 +15,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -65,8 +66,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
 
         jmAlumno.setText("Alumno");
+        jmAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmAlumnoActionPerformed(evt);
+            }
+        });
 
         jmiGestionAlumno.setText("Gestion de Alumnos");
+        jmiGestionAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiGestionAlumnoActionPerformed(evt);
+            }
+        });
         jmAlumno.add(jmiGestionAlumno);
 
         jMenuBar1.add(jmAlumno);
@@ -113,6 +124,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jmAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAlumnoActionPerformed
+        
+    }//GEN-LAST:event_jmAlumnoActionPerformed
+
+    private void jmiGestionAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiGestionAlumnoActionPerformed
+        // Enlace a la Gestión de alumnos
+        escritorio.removeAll();
+        escritorio.repaint();
+        GestionAlumnos gestion=new GestionAlumnos();
+        gestion.setVisible(true);
+        escritorio.add(gestion);
+    }//GEN-LAST:event_jmiGestionAlumnoActionPerformed
 
     /**
      * @param args the command line arguments
