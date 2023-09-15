@@ -150,10 +150,13 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
     private void materiasCursadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_materiasCursadasActionPerformed
         materiasNoCursadas.setSelected(false);
         
+        
     }//GEN-LAST:event_materiasCursadasActionPerformed
 
     private void materiasNoCursadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_materiasNoCursadasActionPerformed
         materiasCursadas.setSelected(false);
+        
+        
     }//GEN-LAST:event_materiasNoCursadasActionPerformed
 
 
@@ -186,4 +189,5 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
         }
         comboBox.setModel(modeloBox);
     }
+    
 }

@@ -11,9 +11,7 @@ package Vistas;
  */
 public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ManipulacionDeNotas
-     */
+    
     public ManipulacionDeNotas() {
         initComponents();
     }
