@@ -14,3 +14,4 @@ ProyectoTranversalULP43/src/AccesoADatos/Conectar.java
 *.form
 *.properties
 *.properties
+*.xml
