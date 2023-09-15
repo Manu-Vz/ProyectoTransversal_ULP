@@ -169,7 +169,7 @@ public class InscripcionData {
      public void actualizarNota(int idAlumno, int idMateria, double nota) {
         
         try {
-            String sql = "UPDATE inscripcion SET nota = ? WHERE id_alumno = ? AND id_materia = ?";
+            String sql = "UPDATE inscripcion SET nota = ? WHERE alumno = ? AND materia = ?";
             
             
             PreparedStatement ps = con.prepareStatement(sql);
@@ -187,11 +187,7 @@ public class InscripcionData {
         } catch (SQLException ex) {
             Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-            }
-                 catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de inscripcion: " + ex.getMessage());
-        }
+     }
     }
      
 
