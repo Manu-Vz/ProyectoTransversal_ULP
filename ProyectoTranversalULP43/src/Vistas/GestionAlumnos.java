@@ -44,6 +44,7 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         initComponents();
         camposInicial();
         armarTabla();
+        cargoCombo();
     }
 
     /**
@@ -350,7 +351,7 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
     private void jbtAlumnoNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAlumnoNuevoActionPerformed
         // Este procedimietno habilita los campos para agregar un alumno
         habitoCampos();
-        cargoCombo();
+        //cargoCombo();
 
     }//GEN-LAST:event_jbtAlumnoNuevoActionPerformed
 
@@ -445,7 +446,7 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         // este procedimiento toma los valores de un alumno seleccionado en la tabla 
         // y los carga en los campos para dar la posibilidad de modificarlos
         jbtAlumnoNuevo.setEnabled(false);
-        cargoCombo();
+        //cargoCombo();
         int valor = jtablaAlumnoResultado.getSelectedRow();
         String tomoID = String.valueOf(modelo.getValueAt(valor, 0));
         String tomoNom = String.valueOf(modelo.getValueAt(valor, 1));
@@ -459,7 +460,7 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         jtAlumnoNom.setText(tomoNom);
         jtAlumnoApe.setText(tomoApe);
         jtAlumnoFechaNac.setText(tomoFecha);
-        if (modelo.getValueAt(valor, 5).equals(tomoEstado)) {
+        if (tomoEstado.equals("true")) {
             jcbAlumnoEstado.setSelectedIndex(0);
         } else {
             jcbAlumnoEstado.setSelectedIndex(1);
