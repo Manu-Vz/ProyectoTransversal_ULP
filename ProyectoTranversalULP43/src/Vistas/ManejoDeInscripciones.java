@@ -1,12 +1,13 @@
 package Vistas;
 
 import AccesoADatos.AlumnoData;
+import AccesoADatos.InscripcionData;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import proyectotranversalulp.Entidades.Alumno;
+import proyectotranversalulp.Entidades.Materia;
 
 /**
  *
@@ -149,13 +150,27 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
 
     private void materiasCursadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_materiasCursadasActionPerformed
         materiasNoCursadas.setSelected(false);
-        
+        List<Materia> materias = new ArrayList();
+        InscripcionData InsData = new InscripcionData();
+        Alumno alu = new Alumno();
+        alu = (Alumno) comboBox.getSelectedItem();
+        materias = InsData.OptenerMateriasCursadas(alu.getIdAlumno());
+        for (Materia m : materias){
+            modeloTabla.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnio()});
+        }
         
     }//GEN-LAST:event_materiasCursadasActionPerformed
 
     private void materiasNoCursadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_materiasNoCursadasActionPerformed
         materiasCursadas.setSelected(false);
-        
+        List<Materia> materias = new ArrayList();
+        InscripcionData InsData = new InscripcionData();
+        Alumno alu = new Alumno();
+        alu = (Alumno) comboBox.getSelectedItem();
+        materias = InsData.OptenerMateriasNoCursadas(alu.getIdAlumno());
+        for (Materia m : materias){
+            modeloTabla.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnio()});
+        }
         
     }//GEN-LAST:event_materiasNoCursadasActionPerformed
 
@@ -184,8 +199,7 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
         List<Alumno> alumnos = new ArrayList();
         alumnos = aluData.listarAlumnos();
         for (Alumno i : alumnos) {
-            String sql = i.getIdAlumno()+", "+i.getNombre()+". "+i.getApellido();
-            modeloBox.addElement(sql);
+            modeloBox.addElement(i);
         }
         comboBox.setModel(modeloBox);
     }
