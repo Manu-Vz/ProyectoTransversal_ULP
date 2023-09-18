@@ -7,7 +7,7 @@ import org.mariadb.jdbc.Connection;
 public class Conectar {
     
     private static final String URL="jdbc:mariadb://localhost:3306/";
-    private static final String DB="proyecto_transversal";
+    private static final String DB="universidad";
     private static final String USUARIO="root";
     private static final String CLAVE="";
     private static Connection conexion;
