@@ -188,7 +188,58 @@ public class InscripcionData {
             Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
         }
      }
+     
+     
+     public List<Alumno> obtenerAlumnosXmateria(int idMateria){
+         List<Alumno> ListaAlumnos = new ArrayList<>();
+         String sql =  "SELECT a.* FROM alumno a INNER JOIN inscripcion i ON a.id_alumno = i.id_alumno WHERE i.id_materia = ?";
+         
+           Connection conexion = obtenerConexion();
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, idMateria);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()){
+                Alumno alumno = new Alumno();
+                alumno.setIdAlumno(rs.getInt("idAlumno"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setApellido(rs.getString("apellido"));
+                ListaAlumnos.add(alumno);
+                
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+{
+         return ListaAlumnos;
+     }
+            
+         
+     }
+
+    private Connection obtenerConexion() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+    }
+
+
      
 
 
