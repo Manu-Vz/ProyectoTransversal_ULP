@@ -33,6 +33,10 @@ public class ConsultaAlumnoPorMateria extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTabla = new javax.swing.JTable();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+
         jTextField1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jTextField1.setText("Listado de Alumnos por Materia");
 
