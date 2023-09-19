@@ -5,6 +5,7 @@ import AccesoADatos.InscripcionData;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyectotranversalulp.Entidades.Alumno;
 import proyectotranversalulp.Entidades.Inscripcion;
@@ -21,7 +22,10 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
     private AlumnoData aluData = new AlumnoData();
     
     public ManejoDeInscripciones() {
-        this.modeloTabla = new DefaultTableModel();
+        this.modeloTabla = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int f, int c) {
+                return false; }};
         this.modeloBox = new DefaultComboBoxModel();
         initComponents();
         armarTabla();
@@ -220,28 +224,37 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
     private void anularInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anularInscripcionActionPerformed
         // TODO add your handling code here:
         int i = tabla.getSelectedRow();
+        if (i != -1){
         InscripcionData id = new InscripcionData();
         Alumno alu = new Alumno();
         alu = (Alumno) comboBox.getSelectedItem();
         Materia mat = new Materia();
         id.borrarInscripcionMateriaAlumno(alu.getIdAlumno(), (int) modeloTabla.getValueAt(i, 0));
         materiasCursadasActionPerformed(evt);
+        } else {
+            JOptionPane.showMessageDialog(null,"Seleccione una materia antes de utilizar el boton");
+        }
     }//GEN-LAST:event_anularInscripcionActionPerformed
 
     private void InscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InscribirActionPerformed
         // TODO add your handling code here:
         int i = tabla.getSelectedRow();
-        Inscripcion insc = new Inscripcion();
-        insc.setAlumno((Alumno) comboBox.getSelectedItem());
-        Materia mat = new Materia();
-        mat.setIdMateria((int) modeloTabla.getValueAt(i, 0));
-        mat.setNombre((String) modeloTabla.getValueAt(i, 1));
-        mat.setAnio((int) modeloTabla.getValueAt(i, 2));
-        insc.setMateria(mat);
-        insc.setNota(0.0);
-        InscripcionData id = new InscripcionData();
-        id.guardarInscripcion(insc);
-        materiasNoCursadasActionPerformed(evt);
+        if (i != -1){
+            Inscripcion insc = new Inscripcion();
+            insc.setAlumno((Alumno) comboBox.getSelectedItem());
+            Materia mat = new Materia();
+            mat.setIdMateria((int) modeloTabla.getValueAt(i, 0));
+            mat.setNombre((String) modeloTabla.getValueAt(i, 1));
+            mat.setAnio((int) modeloTabla.getValueAt(i, 2));
+            insc.setMateria(mat);
+            insc.setNota(0.0);
+            InscripcionData id = new InscripcionData();
+            id.guardarInscripcion(insc);
+            materiasNoCursadasActionPerformed(evt);
+        } else {
+            JOptionPane.showMessageDialog(null,"Seleccione una materia antes de utilizar el boton");
+        }
+        
     }//GEN-LAST:event_InscribirActionPerformed
 
 
