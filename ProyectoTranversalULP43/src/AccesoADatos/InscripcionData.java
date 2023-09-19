@@ -37,7 +37,7 @@ public class InscripcionData {
     }
     
      public void guardarInscripcion(Inscripcion insc){
-       String sql="INSERT INTO inscripcion(idAlumno,idMateria, nota) VALUES(?,?,?)";
+       String sql="INSERT INTO inscripcion(alumno, materia, nota, estado) VALUES(?,?,?,1)";
    
        try {
            
@@ -96,8 +96,8 @@ public class InscripcionData {
         
         try {
             
-            String sql = "SELECT inscripcion.materia, nombre, anio FROM inscripcion,"
-                + "materia WHERE inscripcion.materia = materia.idMateria\n "
+            String sql = "SELECT idMateria, nombre, anio FROM inscripcion, "
+                + "materia WHERE inscripcion.materia = materia.idMateria "
                 + "AND inscripcion.alumno = ? ";
                 PreparedStatement ps = con.prepareStatement(sql);
                 ps.setInt(1, id);
@@ -122,7 +122,7 @@ public class InscripcionData {
         ArrayList<Materia> materias = new ArrayList<>();
         
         String sql = "SELECT * FROM materia WHERE  estado = 1 AND idMateria NOT IN (SELECT materia FROM inscripcion"
-                + "WHERE alumno = ?)";
+              + " WHERE alumno = ?)";
         
         try {
                 PreparedStatement ps = con.prepareStatement(sql);
@@ -151,7 +151,7 @@ public class InscripcionData {
         try {
             String sql = "DELETE FROM inscripcion WHERE alumno = ?  AND materia = ?";
             
-            PreparedStatement ps = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, idAlumno);
             ps.setInt(2, idMateria);
             int filas = ps.executeUpdate();
