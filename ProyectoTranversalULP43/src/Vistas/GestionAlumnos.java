@@ -5,17 +5,13 @@
 package Vistas;
 
 import AccesoADatos.AlumnoData;
-import com.toedter.calendar.JDateChooser;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyectotranversalulp.Entidades.Alumno;
 
@@ -141,6 +137,9 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtAlumnoApeKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtAlumnoApeKeyReleased(evt);
+            }
         });
 
         jLabel6.setText("Fecha Nac.");
@@ -194,6 +193,11 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         jLabelErrorDNI.setForeground(new java.awt.Color(255, 51, 51));
 
         jDAlumnoFechaNac.setDateFormatString("yyyy-MM-dd");
+        jDAlumnoFechaNac.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jDAlumnoFechaNacFocusGained(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -315,7 +319,8 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
             activo=true;
         }
         temp.setEstado(activo);
-        
+        SimpleDateFormat formato=new SimpleDateFormat("yyyy-MM-dd");
+        Date fec=jDAlumnoFechaNac.getDate();
     }//GEN-LAST:event_jbtAlumnoModificarActionPerformed
 
     private void jtAlumnoDNIKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtAlumnoDNIKeyReleased
@@ -473,6 +478,21 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_jtablaAlumnoResultadoMouseClicked
+
+    private void jDAlumnoFechaNacFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDAlumnoFechaNacFocusGained
+        // chequeo que el campo apellido no este vacío
+        if(jtAlumnoApe.getText().isEmpty()){
+            jEtiquetaApe.setText("El campo APELLIDO no puede estar vacío");
+            jtAlumnoApe.requestFocus();
+        }
+    }//GEN-LAST:event_jDAlumnoFechaNacFocusGained
+
+    private void jtAlumnoApeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtAlumnoApeKeyReleased
+        // si se empieza a escribir borro el mensaje
+        if(!jtAlumnoApe.getText().isEmpty()){
+            jEtiquetaApe.setText("");
+        }
+    }//GEN-LAST:event_jtAlumnoApeKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
