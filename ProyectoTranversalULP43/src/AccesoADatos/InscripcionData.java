@@ -192,11 +192,11 @@ public class InscripcionData {
      
      public List<Alumno> obtenerAlumnosXmateria(int idMateria){
          List<Alumno> ListaAlumnos = new ArrayList<>();
-         String sql =  "SELECT a.* FROM alumno a INNER JOIN inscripcion i ON a.id_alumno = i.id_alumno WHERE i.id_materia = ?";
+         String sql =  "SELECT a.* FROM alumno a INNER JOIN inscripcion i ON a.idAlumno = i.alumno WHERE i.materia = ?";
          
-           Connection conexion = obtenerConexion();
+           //Connection conexion = obtenerConexion();
         try {
-            PreparedStatement ps = conexion.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idMateria);
             ResultSet rs = ps.executeQuery();
             
@@ -219,28 +219,8 @@ public class InscripcionData {
          
      }
 
-    private Connection obtenerConexion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-    }
 
-
-     
-
-
-
+//    private Connection obtenerConexion() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+}

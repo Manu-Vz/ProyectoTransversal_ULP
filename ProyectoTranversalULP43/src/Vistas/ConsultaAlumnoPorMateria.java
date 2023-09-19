@@ -6,6 +6,7 @@ package Vistas;
 
 
 import AccesoADatos.AlumnoData;
+import AccesoADatos.InscripcionData;
 import AccesoADatos.MateriaData;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ private DefaultTableModel modelo = new DefaultTableModel();
 private DefaultComboBoxModel modeloCB = new DefaultComboBoxModel();
 private MateriaData matData = new MateriaData();
 private AlumnoData aluData = new AlumnoData();
+private InscripcionData insData = new InscripcionData();
 
     /**
      * Creates new form ConsultaAlumnoPorMateria
@@ -53,7 +55,6 @@ private AlumnoData aluData = new AlumnoData();
         setIconifiable(true);
         setMaximizable(true);
 
-        jcbMateria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una materia" }));
         jcbMateria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbMateriaActionPerformed(evt);
@@ -130,8 +131,18 @@ private AlumnoData aluData = new AlumnoData();
         // TODO add your handling code here:
         borrarFilas();
         List<Alumno> alumnos = new ArrayList<>();
-        alumnos = aluData.listarAlumnos();
         
+        int jcbm = jcbMateria.getSelectedIndex();
+        alumnos = insData.obtenerAlumnosXmateria(jcbm);
+        System.out.println("Aca muestro el id " + jcbm);
+        
+        for (Alumno alu : alumnos) {
+            
+            System.out.println("aca muestro el nombre " + alu.getNombre());
+            modelo.addRow(new Object[]{alu.getIdAlumno(),alu.getDni(),alu.getApellido(),alu.getNombre()});
+            
+        }
+        //jtTabla.setModel(modelo);
     }//GEN-LAST:event_jcbMateriaActionPerformed
 
 
