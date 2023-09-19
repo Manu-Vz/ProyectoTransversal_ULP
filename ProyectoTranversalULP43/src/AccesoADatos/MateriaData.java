@@ -120,7 +120,7 @@ public class MateriaData {
     public List<Materia> listarMatera (){
         List<Materia> materias = new ArrayList<>();
         
-        String sql = "Select * from materia Where estado = 1";
+        String sql = "Select * from materia";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
