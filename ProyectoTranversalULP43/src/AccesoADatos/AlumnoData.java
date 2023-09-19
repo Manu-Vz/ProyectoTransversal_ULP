@@ -121,7 +121,7 @@ public class AlumnoData {
         
         List<Alumno> alumnos = new ArrayList<>();
         
-        String sql = "SELECT * FROM alumno WHERE estado = 1";
+        String sql = "SELECT * FROM alumno";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();

@@ -5,13 +5,14 @@
 package Vistas;
 
 import AccesoADatos.AlumnoData;
+import com.toedter.calendar.JDateChooser;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -68,7 +69,6 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jtAlumnoApe = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jtAlumnoFechaNac = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jcbAlumnoEstado = new javax.swing.JComboBox<>();
         jbtAlumnoAgregar = new javax.swing.JButton();
@@ -79,6 +79,7 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         jEtiquetaApe = new javax.swing.JLabel();
         jEtiquetaFecha = new javax.swing.JLabel();
         jLabelErrorDNI = new javax.swing.JLabel();
+        jDAlumnoFechaNac = new com.toedter.calendar.JDateChooser();
 
         jtablaAlumnoResultado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -145,17 +146,6 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         jLabel6.setText("Fecha Nac.");
         jLabel6.setFocusable(false);
 
-        jtAlumnoFechaNac.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jtAlumnoFechaNacFocusGained(evt);
-            }
-        });
-        jtAlumnoFechaNac.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jtAlumnoFechaNacKeyPressed(evt);
-            }
-        });
-
         jLabel7.setText("Estado");
         jLabel7.setFocusable(false);
 
@@ -203,6 +193,8 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         jLabelErrorDNI.setFont(new java.awt.Font("Liberation Sans", 0, 10)); // NOI18N
         jLabelErrorDNI.setForeground(new java.awt.Color(255, 51, 51));
 
+        jDAlumnoFechaNac.setDateFormatString("yyyy-MM-dd");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -217,7 +209,8 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
-                                .addComponent(jtAlumnoFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)))
+                                .addComponent(jDAlumnoFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 28, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
@@ -289,11 +282,12 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
                     .addComponent(jEtiquetaNom, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jEtiquetaApe, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jtAlumnoFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jcbAlumnoEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel7)
+                        .addComponent(jcbAlumnoEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDAlumnoFechaNac, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jEtiquetaFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
@@ -311,7 +305,17 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtAlumnoModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAlumnoModificarActionPerformed
-        // TODO add your handling code here:
+        // Actualizo datos de el alumno seleccionado
+        temp.setApellido(jtAlumnoApe.getText());
+        temp.setNombre(jtAlumnoNom.getText());
+        temp.setDni(Integer.parseInt(jtAlumnoDNI.getText()));
+        int valor=jcbAlumnoEstado.getSelectedIndex();
+        boolean activo=false;
+        if(valor==0){
+            activo=true;
+        }
+        temp.setEstado(activo);
+        
     }//GEN-LAST:event_jbtAlumnoModificarActionPerformed
 
     private void jtAlumnoDNIKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtAlumnoDNIKeyReleased
@@ -321,11 +325,18 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         borroFilas();
         camposInicial();
         //System.out.println("traigo la cadena " + ingresoDNI);
-        int cantidad = ingresoDNI.length();
+        
         listaAlumnos = abmData.listarAlumnos();
         //System.out.println("numero "+cantidad);
         //System.out.println("el caracter "+ingresoDNI.substring(cantidad-1, cantidad));
-        if (!ingresoDNI.substring(cantidad-1, cantidad).matches("[0-9]*")) {
+        int cantidad = ingresoDNI.length();
+        if(cantidad==1 && ingresoDNI.substring(cantidad-1, cantidad).matches("[a-z]*")){
+            jLabelErrorDNI.setText("Solo se permiten número entre 0 y 9. Sin espacios ni caracteres");
+        } else if(cantidad==1 && ingresoDNI.substring(cantidad-1, cantidad).matches("[A-Z]*")){
+            jLabelErrorDNI.setText("Solo se permiten número entre 0 y 9. Sin espacios ni caracteres");
+        } else if(cantidad==0){
+            jLabelErrorDNI.setText("");
+        } else if (!ingresoDNI.substring(cantidad-1, cantidad).matches("[0-9]*")) {
             jLabelErrorDNI.setText("Solo se permiten número entre 0 y 9. Sin espacios ni caracteres");
         } else {
             if (ingresoDNI.isEmpty()) {
@@ -351,8 +362,6 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
     private void jbtAlumnoNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAlumnoNuevoActionPerformed
         // Este procedimietno habilita los campos para agregar un alumno
         habitoCampos();
-        //cargoCombo();
-
     }//GEN-LAST:event_jbtAlumnoNuevoActionPerformed
 
     private void jtAlumnoNomKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtAlumnoNomKeyPressed
@@ -369,13 +378,6 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jtAlumnoApeKeyPressed
 
-    private void jtAlumnoFechaNacKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtAlumnoFechaNacKeyPressed
-        // Cuando se escribe algo en el campo fecha de nacimiento borro la advertencia si es que está
-        if (!jEtiquetaFecha.getText().isEmpty()) {
-            jEtiquetaFecha.setText("");
-        }
-    }//GEN-LAST:event_jtAlumnoFechaNacKeyPressed
-
     private void jtAlumnoApeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtAlumnoApeFocusGained
         // chequeo que el campo anterios (nombre) no este vacío
         if (jtAlumnoNom.getText().isEmpty()) {
@@ -384,31 +386,17 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jtAlumnoApeFocusGained
 
-    private void jtAlumnoFechaNacFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtAlumnoFechaNacFocusGained
-        // chequeo que el campo anterior (apellido) no este vacío
-        if (jtAlumnoApe.getText().isEmpty()) {
-            jEtiquetaApe.setText("El campo APELLIDO no puede estar vacío");
-            jtAlumnoApe.requestFocus();
-        }
-    }//GEN-LAST:event_jtAlumnoFechaNacFocusGained
-
     private void jcbAlumnoEstadoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jcbAlumnoEstadoFocusGained
         // chequeo que el campo anterior (fecha de nacimiento) no este vacío
-        if (jtAlumnoFechaNac.getText().isEmpty()) {
+//        System.out.println(" sin formatear "+jDAlumnoFechaNac.getCalendar());
+//        Date aver=jDAlumnoFechaNac.getDate();
+//        System.out.println("que viene "+aver);
+        if (jDAlumnoFechaNac.getCalendar()==null) {
             jEtiquetaFecha.setText("El campo FECHA DE NACIMIENTO no puede estar vacío");
-            jtAlumnoFechaNac.requestFocus();
+            jDAlumnoFechaNac.requestFocus();
         } else {
-            try {
-                SimpleDateFormat chequeo=new SimpleDateFormat("yyyy-MM-dd");
-                Date fecha=chequeo.parse(jtAlumnoFechaNac.getText());
-                System.out.println("muestro la variable fecha "+fecha);
-                if(!fecha.equals(chequeo)){
-                    System.out.println("entro a la no igualdad e imorimo chequeo "+chequeo);
-                }
-                jbtAlumnoAgregar.setEnabled(true);
-            } catch (ParseException ex) {
-                JOptionPane.showMessageDialog(this, "El formato de la fecha no es válida - debe ser aaaa-MM-dd");
-            }
+            jEtiquetaFecha.setText("");
+            jbtAlumnoAgregar.setEnabled(true);
         }
     }//GEN-LAST:event_jcbAlumnoEstadoFocusGained
 
@@ -416,7 +404,12 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         // construyo el alumno para agregar a la base de datos
         // nombre,apellido,dni,fechaNacimiento,estado
         int castDNI = Integer.parseInt(jtAlumnoDNI.getText());
-        LocalDate castFecha = LocalDate.parse(jtAlumnoFechaNac.getText());
+        Date fecha=jDAlumnoFechaNac.getDate();
+        SimpleDateFormat formato=new SimpleDateFormat("yyyy-MM-dd");
+        String valor=formato.format(fecha);
+        //System.out.println("muestro "+valor);
+        LocalDate castFecha=LocalDate.parse(valor);
+        //System.out.println("muestro el local date "+castFecha);
         int valorCombo = jcbAlumnoEstado.getSelectedIndex();
         boolean activo = false;
         if (valorCombo == 0) {
@@ -429,13 +422,18 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         temp.setFechaNacimiento(castFecha);
         temp.setEstado(activo);
         abmData.guardarAlumno(temp);
+        jtAlumnoDNI.requestFocus();
+        jtAlumnoDNI.selectAll();
+        jtAlumnoApe.setText("");
+        jtAlumnoNom.setText("");
+        camposInicial();
     }//GEN-LAST:event_jbtAlumnoAgregarActionPerformed
 
     private void jbtAlumnoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAlumnoCancelarActionPerformed
         // este procedimiento borra todos los campos 
         jtAlumnoNom.setText("");
         jtAlumnoApe.setText("");
-        jtAlumnoFechaNac.setText("");
+        //jDAlumnoFechaNac.setText("");
         jLabelAlumnoID.setText("");
         jtAlumnoDNI.setText("");
         jtAlumnoDNI.requestFocus();
@@ -443,35 +441,42 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbtAlumnoCancelarActionPerformed
 
     private void jtablaAlumnoResultadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtablaAlumnoResultadoMouseClicked
-        // este procedimiento toma los valores de un alumno seleccionado en la tabla 
-        // y los carga en los campos para dar la posibilidad de modificarlos
-        jbtAlumnoNuevo.setEnabled(false);
-        //cargoCombo();
-        int valor = jtablaAlumnoResultado.getSelectedRow();
-        String tomoID = String.valueOf(modelo.getValueAt(valor, 0));
-        String tomoNom = String.valueOf(modelo.getValueAt(valor, 1));
-        String tomoApe = String.valueOf(modelo.getValueAt(valor, 2));
-        String tomoFecha = String.valueOf(modelo.getValueAt(valor, 3));
-        String tomoDNI = String.valueOf(modelo.getValueAt(valor, 4));
-        String tomoEstado = String.valueOf(modelo.getValueAt(valor, 5));
-        System.out.println("a ver que de devuelve la tabla de el campo estado " + modelo.getValueAt(valor, 5));
-        jLabelAlumnoID.setText(tomoID);
-        jtAlumnoDNI.setText(tomoDNI);
-        jtAlumnoNom.setText(tomoNom);
-        jtAlumnoApe.setText(tomoApe);
-        jtAlumnoFechaNac.setText(tomoFecha);
-        if (tomoEstado.equals("true")) {
-            jcbAlumnoEstado.setSelectedIndex(0);
-        } else {
-            jcbAlumnoEstado.setSelectedIndex(1);
+        try {
+            // este procedimiento toma los valores de un alumno seleccionado en la tabla
+            // y los carga en los campos para dar la posibilidad de modificarlos
+            jbtAlumnoNuevo.setEnabled(false);
+            //cargoCombo();
+            int valor = jtablaAlumnoResultado.getSelectedRow();
+            String tomoID = String.valueOf(modelo.getValueAt(valor, 0));
+            String tomoNom = String.valueOf(modelo.getValueAt(valor, 1));
+            String tomoApe = String.valueOf(modelo.getValueAt(valor, 2));
+            String tomoFecha = String.valueOf(modelo.getValueAt(valor, 3));
+            String tomoDNI = String.valueOf(modelo.getValueAt(valor, 4));
+            String tomoEstado = String.valueOf(modelo.getValueAt(valor, 5));
+            //System.out.println("Muestro fecha "+tomoFecha);
+            SimpleDateFormat formato=new SimpleDateFormat("yyyy-MM-dd");
+            Date castFecha=formato.parse(tomoFecha);
+            jLabelAlumnoID.setText(tomoID);
+            jtAlumnoDNI.setText(tomoDNI);
+            jtAlumnoNom.setText(tomoNom);
+            jtAlumnoApe.setText(tomoApe);
+            jDAlumnoFechaNac.setDate(castFecha);
+            if (tomoEstado.equals("true")) {
+                jcbAlumnoEstado.setSelectedIndex(0);
+            } else {
+                jcbAlumnoEstado.setSelectedIndex(1);
+            }
+            jbtAlumnoModificar.setEnabled(true);
+            habitoCampos();
+        } catch (ParseException ex) {
+            Logger.getLogger(GestionAlumnos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        jbtAlumnoModificar.setEnabled(true);
-        habitoCampos();
 
     }//GEN-LAST:event_jtablaAlumnoResultadoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser jDAlumnoFechaNac;
     private javax.swing.JLabel jEtiquetaApe;
     private javax.swing.JLabel jEtiquetaFecha;
     private javax.swing.JLabel jEtiquetaNom;
@@ -492,7 +497,6 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jcbAlumnoEstado;
     private javax.swing.JTextField jtAlumnoApe;
     private javax.swing.JTextField jtAlumnoDNI;
-    private javax.swing.JTextField jtAlumnoFechaNac;
     private javax.swing.JTextField jtAlumnoNom;
     private javax.swing.JTable jtablaAlumnoResultado;
     // End of variables declaration//GEN-END:variables
@@ -501,7 +505,7 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         jbtAlumnoNuevo.setEnabled(false);
         jtAlumnoNom.setEnabled(false);
         jtAlumnoApe.setEnabled(false);
-        jtAlumnoFechaNac.setEnabled(false);
+        jDAlumnoFechaNac.setEnabled(false);
         jcbAlumnoEstado.setEnabled(false);
         jbtAlumnoAgregar.setEnabled(false);
         jbtAlumnoModificar.setEnabled(false);
@@ -512,7 +516,7 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
     private void habitoCampos() {
         jtAlumnoNom.setEnabled(true);
         jtAlumnoApe.setEnabled(true);
-        jtAlumnoFechaNac.setEnabled(true);
+        jDAlumnoFechaNac.setEnabled(true);
         jcbAlumnoEstado.setEnabled(true);
     }
 
