@@ -153,14 +153,14 @@ public class AlumnoData {
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, alumno.getIdAlumno());
-            ps.setString(2, alumno.getNombre());
-            ps.setString(3,alumno.getApellido());
-            ps.setInt(4, alumno.getDni());
-            ps.setDate(5, Date.valueOf(alumno.getFechaNacimiento()));
-            
+            ps.setInt(1, alumno.getDni());
+            ps.setString(2, alumno.getApellido());
+            ps.setString(3, alumno.getNombre());
+            ps.setDate(4,Date.valueOf(alumno.getFechaNacimiento()));
+            ps.setInt(5, alumno.getIdAlumno());
+            ps.executeUpdate();
                     
-                    
+                      
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno " +ex.getMessage());
         }
