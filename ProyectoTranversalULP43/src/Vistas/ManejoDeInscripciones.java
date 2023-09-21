@@ -219,18 +219,21 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
 
     private void comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxActionPerformed
         // TODO add your handling code here:
+        modeloTabla.setRowCount(0);
+        anularInscripcion.setSelected(false);
+        Inscribir.setSelected(false);
     }//GEN-LAST:event_comboBoxActionPerformed
 
     private void anularInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anularInscripcionActionPerformed
         // TODO add your handling code here:
         int i = tabla.getSelectedRow();
         if (i != -1){
-        InscripcionData id = new InscripcionData();
-        Alumno alu = new Alumno();
-        alu = (Alumno) comboBox.getSelectedItem();
-        Materia mat = new Materia();
-        id.borrarInscripcionMateriaAlumno(alu.getIdAlumno(), (int) modeloTabla.getValueAt(i, 0));
-        materiasCursadasActionPerformed(evt);
+            InscripcionData id = new InscripcionData();
+            Alumno alu = new Alumno();
+            alu = (Alumno) comboBox.getSelectedItem();
+            Materia mat = new Materia();
+            id.borrarInscripcionMateriaAlumno(alu.getIdAlumno(), (int) modeloTabla.getValueAt(i, 0));
+            materiasCursadasActionPerformed(evt);
         } else {
             JOptionPane.showMessageDialog(null,"Seleccione una materia antes de utilizar el boton");
         }

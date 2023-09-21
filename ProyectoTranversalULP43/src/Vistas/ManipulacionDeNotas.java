@@ -1,11 +1,19 @@
 package Vistas;
 
 import AccesoADatos.AlumnoData;
+import AccesoADatos.InscripcionData;
+import static java.lang.Double.parseDouble;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.TreeMap;
+import javafx.event.Event;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyectotranversalulp.Entidades.Alumno;
+import proyectotranversalulp.Entidades.Inscripcion;
+import proyectotranversalulp.Entidades.Materia;
 
 /**
  *
@@ -15,7 +23,8 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
 
     private DefaultTableModel modeloTabla;
     private DefaultComboBoxModel modeloBox;
-    
+      
+    HashSet<Integer> filas = new HashSet();
     public ManipulacionDeNotas() {
         this.modeloTabla = new DefaultTableModel(){
             @Override
@@ -28,8 +37,9 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
         initComponents();
         armarBox();
         armarTabla();
+        jButton1.setEnabled(false);
     }
-
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -38,9 +48,10 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        ComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Cargar Notas");
@@ -48,7 +59,17 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Seleccione un alumno:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ComboBoxItemStateChanged(evt);
+            }
+        });
+        ComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBoxActionPerformed(evt);
+            }
+        });
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -61,7 +82,19 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabla);
+
+        jButton1.setText("Guardar Cambios");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -78,12 +111,16 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
                                 .addGap(34, 34, 34)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(151, 151, 151)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,11 +129,12 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -109,15 +147,61 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 9, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboBoxActionPerformed
+
+    private void ComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBoxItemStateChanged
+        // TODO add your handling code here:
+        modeloTabla.setRowCount(0);
+        InscripcionData InsData = new InscripcionData();
+        List<Inscripcion> inscripciones = new ArrayList();
+        Alumno alu = new Alumno();
+        alu = (Alumno) ComboBox.getSelectedItem();
+        inscripciones = InsData.optenerInscripcionPorAlumno(alu.getIdAlumno());
+        for (Inscripcion i : inscripciones){
+            modeloTabla.addRow(new Object[]{i.getMateria().getIdMateria(),
+                i.getMateria().getNombre(),
+                i.getNota()+""});
+        }
+    }//GEN-LAST:event_ComboBoxItemStateChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if (!(filas.isEmpty())){
+            InscripcionData insData = new InscripcionData();
+            Materia mate = new Materia();
+            Alumno alu = new Alumno();
+            alu = (Alumno) ComboBox.getSelectedItem();
+            for (int f : filas){
+                mate.setIdMateria((int) modeloTabla.getValueAt(f, 0));
+                insData.actualizarNota(alu.getIdAlumno(), mate.getIdMateria(),
+                        parseDouble((String) modeloTabla.getValueAt(f, 2)));
+            }
+            filas.clear();
+            jButton1.setEnabled(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Realize Cambios");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        // TODO add your handling code here:
+        int f = tabla.getSelectedRow();
+        filas.add(f);
+        jButton1.setEnabled(true);
+    }//GEN-LAST:event_tablaMouseClicked
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> ComboBox;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -132,7 +216,7 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
         for (Alumno i : alumnos) {
             modeloBox.addElement(i);
         }
-        jComboBox1.setModel(modeloBox);
+        ComboBox.setModel(modeloBox);
     }
     
     private void armarTabla() {
@@ -140,11 +224,5 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
         modeloTabla.addColumn("Nombre");
         modeloTabla.addColumn("Nota");
         tabla.setModel(modeloTabla);
-    }
-
-
-
-
-
-
+    } 
 }
