@@ -188,7 +188,4 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiGestionAlumnos;
     private javax.swing.JMenuItem jmiManejoInscripciones;
     // End of variables declaration//GEN-END:variables
-
-    
-
 }
