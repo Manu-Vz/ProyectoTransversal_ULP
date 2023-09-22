@@ -131,18 +131,20 @@ private InscripcionData insData = new InscripcionData();
         // TODO add your handling code here:
         borrarFilas();
         List<Alumno> alumnos = new ArrayList<>();
+        Materia materia = new Materia();
         
-        int jcbm = jcbMateria.getSelectedIndex();
-        alumnos = insData.obtenerAlumnosXmateria(jcbm);
-        System.out.println("Aca muestro el id " + jcbm);
+        materia = (Materia) jcbMateria.getSelectedItem();
+        alumnos = insData.obtenerAlumnosXmateria(materia.getIdMateria());
+        System.out.println("Aca muestro el id " + materia);
+        
         
         for (Alumno alu : alumnos) {
             
             System.out.println("aca muestro el nombre " + alu.getNombre());
-            modelo.addRow(new Object[]{alu.getIdAlumno(),alu.getDni(),alu.getApellido(),alu.getNombre()});
+            modelo.addRow(new Object[]{alu.getIdAlumno(),alu.getDni(),alu.getNombre(),alu.getApellido()});
             
         }
-        //jtTabla.setModel(modelo);
+//        //jtTabla.setModel(modelo);
     }//GEN-LAST:event_jcbMateriaActionPerformed
 
 
@@ -174,7 +176,7 @@ private InscripcionData insData = new InscripcionData();
         List<Materia> materias = new ArrayList();
         materias = matData.listarMatera();
         for (Materia mat : materias) {
-            modeloCB.addElement(mat.getNombre());
+            modeloCB.addElement(mat);
         }
         jcbMateria.setModel(modeloCB);
     }
