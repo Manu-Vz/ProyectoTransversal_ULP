@@ -52,6 +52,8 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
         tabla = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
+        setClosable(true);
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Cargar Notas");
 
@@ -223,5 +225,6 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
         modeloTabla.addColumn("Nombre");
         modeloTabla.addColumn("Nota");
         tabla.setModel(modeloTabla);
-    } 
+    }
+    
 }
