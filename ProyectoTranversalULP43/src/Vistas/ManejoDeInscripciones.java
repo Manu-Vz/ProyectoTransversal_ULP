@@ -297,4 +297,5 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
         Inscribir.setEnabled(false);
         anularInscripcion.setEnabled(false);
     }
+    
 }
