@@ -362,17 +362,14 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         //System.out.println("numero "+cantidad);
         //System.out.println("el caracter "+ingresoDNI.substring(cantidad-1, cantidad));
         int cantidad = ingresoDNI.length();
-        if (cantidad == 1 && ingresoDNI.substring(cantidad - 1, cantidad).matches("[a-z]*")) {
-            jLabelErrorDNI.setText("Solo se permiten número entre 0 y 9. Sin espacios ni caracteres");
-        } else if (cantidad == 1 && ingresoDNI.substring(cantidad - 1, cantidad).matches("[A-Z]*")) {
-            jLabelErrorDNI.setText("Solo se permiten número entre 0 y 9. Sin espacios ni caracteres");
+        if (cantidad == 1 && ingresoDNI.substring(cantidad - 1, cantidad).toLowerCase().matches("[a-z]*")) {
+            jLabelErrorDNI.setText("No puede ingresar letras");
         } else if (cantidad == 0) {
             jLabelErrorDNI.setText("");
         } else if (!ingresoDNI.substring(cantidad - 1, cantidad).matches("[0-9]*")) {
             jLabelErrorDNI.setText("Solo se permiten número entre 0 y 9. Sin espacios ni caracteres");
         } else {
             if (ingresoDNI.isEmpty()) {
-                jtAlumnoDNI.setEnabled(false);
                 borroFilas();
             } else {
                 for (Alumno alu : listaAlumnos) {
@@ -387,7 +384,7 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
                     jbtAlumnoNuevo.setEnabled(true);
                     jLabelErrorDNI.setText("");
                 } else if (modelo.getRowCount() == 0 && ingresoDNI.length() < 8) {
-                    jLabelErrorDNI.setForeground(Color.GREEN.darker());
+                    jLabelErrorDNI.setForeground(Color.YELLOW.darker());
                     Font miFuente = new Font("Liberation Sans", Font.BOLD, 10);
                     jLabelErrorDNI.setFont(miFuente);
                     jLabelErrorDNI.setText("El DNI no existe. Complete el número para agregarlo");
