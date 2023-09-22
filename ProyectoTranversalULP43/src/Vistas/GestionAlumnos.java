@@ -81,6 +81,11 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         jLabelErrorDNI = new javax.swing.JLabel();
         jDAlumnoFechaNac = new com.toedter.calendar.JDateChooser();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+
         jtablaAlumnoResultado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
