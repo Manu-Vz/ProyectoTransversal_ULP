@@ -6,7 +6,6 @@ import static java.lang.Double.parseDouble;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.TreeMap;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -22,22 +21,24 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
 
     private DefaultTableModel modeloTabla;
     private DefaultComboBoxModel modeloBox;
-      
+    private Boolean condicion;  
+    private Boolean teclaApretada;
+    
     HashSet<Integer> filas = new HashSet();
     public ManipulacionDeNotas() {
+        this.condicion = false;
+        this.teclaApretada = false;
         this.modeloTabla = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int f, int c) {
-                if (c < 2){
-                    return false; 
-                }
-                return true;}};
+                return c >= 2;}};
         this.modeloBox = new DefaultComboBoxModel();
         initComponents();
         armarBox();
         armarTabla();
         jButton1.setEnabled(false);
     }
+    
     
     
     @SuppressWarnings("unchecked")
@@ -175,7 +176,9 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if (!(filas.isEmpty())){
+        if (filas.isEmpty() && !condicion){
+            JOptionPane.showMessageDialog(null, "Realize Cambios");
+        } else {
             InscripcionData insData = new InscripcionData();
             Materia mate = new Materia();
             Alumno alu = new Alumno();
@@ -187,14 +190,14 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
             }
             filas.clear();
             jButton1.setEnabled(false);
-        } else {
-            JOptionPane.showMessageDialog(null, "Realize Cambios");
+            ComboBox.setEnabled(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         // TODO add your handling code here:
         int f = tabla.getSelectedRow();
+        ComboBox.setEnabled(false);
         filas.add(f);
         jButton1.setEnabled(true);
     }//GEN-LAST:event_tablaMouseClicked
