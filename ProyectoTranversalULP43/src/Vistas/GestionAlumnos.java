@@ -319,13 +319,13 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
 
     private void jbtAlumnoModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAlumnoModificarActionPerformed
         // Actualizo datos de el alumno seleccionado
-        temp=new Alumno();
+        temp = new Alumno();
         try {
             int idAlu = Integer.parseInt(jLabelAlumnoID.getText());
             temp.setIdAlumno(idAlu);
             temp.setApellido(jtAlumnoApe.getText());
             temp.setNombre(jtAlumnoNom.getText());
-            int dnialu=Integer.parseInt(jtAlumnoDNI.getText());
+            int dnialu = Integer.parseInt(jtAlumnoDNI.getText());
             temp.setDni(dnialu);
             int valor = jcbAlumnoEstado.getSelectedIndex();
             boolean activo = false;
@@ -344,7 +344,7 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
             borroFilas();
             JOptionPane.showMessageDialog(this, "Se ha modificado el Alumno");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Muestro el mensaje "+e.getMessage());
+            JOptionPane.showMessageDialog(this, "Muestro el mensaje " + e.getMessage());
         }
 
 
@@ -353,43 +353,43 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
     private void jtAlumnoDNIKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtAlumnoDNIKeyReleased
         // Procedimiento para la búsque de los alumnos por dni. En le caso de que no exista se puede agregar, si existe
         // se puede modificar
-        String ingresoDNI = jtAlumnoDNI.getText();
         borroFilas();
         camposInicial();
-        //System.out.println("traigo la cadena " + ingresoDNI);
-
+        String ingresoDNI = jtAlumnoDNI.getText();
+        String dniEnFor = "";
+        char[] vectorDNi = ingresoDNI.toCharArray();
         listaAlumnos = abmData.listarAlumnos();
-        //System.out.println("numero "+cantidad);
-        //System.out.println("el caracter "+ingresoDNI.substring(cantidad-1, cantidad));
-        int cantidad = ingresoDNI.length();
-        if (cantidad == 1 && ingresoDNI.substring(cantidad - 1, cantidad).toLowerCase().matches("[a-z]*")) {
-            jLabelErrorDNI.setText("No puede ingresar letras");
-        } else if (cantidad == 0) {
-            jLabelErrorDNI.setText("");
-        } else if (!ingresoDNI.substring(cantidad - 1, cantidad).matches("[0-9]*")) {
-            jLabelErrorDNI.setText("Solo se permiten número entre 0 y 9. Sin espacios ni caracteres");
-        } else {
-            if (ingresoDNI.isEmpty()) {
-                borroFilas();
+        //int cantidad = ingresoDNI.length();
+        for (int i = 0; i < vectorDNi.length; i++) {
+//            System.out.println(" muestro los caracteres " + vectorDNi[i]);
+            dniEnFor = String.valueOf(vectorDNi[i]);
+            if (!dniEnFor.toLowerCase().matches("[0-9]*")) {
+                jLabelErrorDNI.setText("No puede ingresar letras o símbolos");
+                camposInicial();
+                break;
             } else {
-                for (Alumno alu : listaAlumnos) {
-                    String dniCadena = String.valueOf(alu.getDni());
-                    if (dniCadena.startsWith(ingresoDNI)) {
-                        modelo.addRow(new Object[]{alu.getIdAlumno(), alu.getNombre(), alu.getApellido(),
-                            alu.getFechaNacimiento(), alu.getDni(), alu.isEstado()});
+                jLabelErrorDNI.setText("");
+                if (ingresoDNI.isEmpty()) {
+                    borroFilas();
+                } else {
+                    borroFilas();
+                    for (Alumno alum : listaAlumnos) {
+                        String dniCadena = String.valueOf(alum.getDni());
+                        if (dniCadena.startsWith(ingresoDNI)) {
+                            modelo.addRow(new Object[]{alum.getIdAlumno(), alum.getNombre(), alum.getApellido(),
+                                alum.getFechaNacimiento(), alum.getDni(), alum.isEstado()});
+                        }
                     }
-
+                    if (modelo.getRowCount() == 0 && ingresoDNI.length() >= 8) {
+                        jbtAlumnoNuevo.setEnabled(true);
+                        jLabelErrorDNI.setText("");
+                    } else if (modelo.getRowCount() == 0 && ingresoDNI.length() < 8) {
+                        jLabelErrorDNI.setForeground(Color.YELLOW.darker());
+                        Font miFuente = new Font("Liberation Sans", Font.BOLD, 10);
+                        jLabelErrorDNI.setFont(miFuente);
+                        jLabelErrorDNI.setText("El DNI no existe. Complete el número para agregarlo");
+                    }
                 }
-                if (modelo.getRowCount() == 0 && ingresoDNI.length() >= 8) {
-                    jbtAlumnoNuevo.setEnabled(true);
-                    jLabelErrorDNI.setText("");
-                } else if (modelo.getRowCount() == 0 && ingresoDNI.length() < 8) {
-                    jLabelErrorDNI.setForeground(Color.YELLOW.darker());
-                    Font miFuente = new Font("Liberation Sans", Font.BOLD, 10);
-                    jLabelErrorDNI.setFont(miFuente);
-                    jLabelErrorDNI.setText("El DNI no existe. Complete el número para agregarlo");
-                }
-
             }
         }
     }//GEN-LAST:event_jtAlumnoDNIKeyReleased
