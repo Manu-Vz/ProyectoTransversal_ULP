@@ -161,6 +161,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // Esta acción dispara el formulario de Gestión de Materias
+        //Meto esto para hacer un commit
         escritorio.removeAll();
         escritorio.repaint();
         GestionMat gestionMat=new GestionMat();
