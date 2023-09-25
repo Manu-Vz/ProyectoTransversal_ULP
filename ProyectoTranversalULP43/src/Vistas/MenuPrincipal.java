@@ -67,6 +67,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu2.setText("Materias");
 
         jMenuItem2.setText("Formulario Materias");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem2);
 
         jMenuBar1.add(jMenu2);
@@ -153,6 +158,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         man.setVisible(true);
         escritorio.add(man);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // Esta acción dispara el formulario de Gestión de Materias
+        escritorio.removeAll();
+        escritorio.repaint();
+        GestionMat gestionMat=new GestionMat();
+        gestionMat.setVisible(true);
+        escritorio.add(gestionMat);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
