@@ -417,6 +417,7 @@ public class GestionMat extends javax.swing.JInternalFrame {
         jtEdicionMateria.setEnabled(false);
         jtEdicionMateria.setText("");
         jbtAgregoMat.setEnabled(false);
+        jtBuscar.setEnabled(true);
     }
     
     private void habilitoCampos(){
