@@ -20,8 +20,12 @@ import proyectotranversalulp.Entidades.Materia;
  * @author abate
  */
 public class ConsultaAlumnoPorMateria extends javax.swing.JInternalFrame {
-private DefaultTableModel modelo = new DefaultTableModel();
-private DefaultComboBoxModel modeloCB = new DefaultComboBoxModel();
+private DefaultTableModel modelo = new DefaultTableModel(){
+    public boolean isCellEditable(int f, int c){
+        return false;
+    }  
+};
+private DefaultComboBoxModel modeloCB = new DefaultComboBoxModel();  
 private MateriaData matData = new MateriaData();
 private AlumnoData aluData = new AlumnoData();
 private InscripcionData insData = new InscripcionData();
@@ -33,6 +37,8 @@ private InscripcionData insData = new InscripcionData();
         initComponents();
         armarCabecera();
         cargarCombo();
+        jcbMateria.setSelectedIndex(-1);
+        
     }
 
     /**
@@ -129,22 +135,23 @@ private InscripcionData insData = new InscripcionData();
 
     private void jcbMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbMateriaActionPerformed
         // TODO add your handling code here:
-        borrarFilas();
-        List<Alumno> alumnos = new ArrayList<>();
-        Materia materia = new Materia();
+        if (jcbMateria.getSelectedIndex() != -1) {
+           borrarFilas();
+            List<Alumno> alumnos = new ArrayList<>();
+            Materia materia = new Materia();
         
-        materia = (Materia) jcbMateria.getSelectedItem();
-        alumnos = insData.obtenerAlumnosXmateria(materia.getIdMateria());
-        System.out.println("Aca muestro el id " + materia);
+            materia = (Materia) jcbMateria.getSelectedItem();
+            alumnos = insData.obtenerAlumnosXmateria(materia.getIdMateria());
+            System.out.println("Aca muestro el id " + materia);
         
         
-        for (Alumno alu : alumnos) {
+            for (Alumno alu : alumnos) {
             
             System.out.println("aca muestro el nombre " + alu.getNombre());
             modelo.addRow(new Object[]{alu.getIdAlumno(),alu.getDni(),alu.getNombre(),alu.getApellido()});
             
+            } 
         }
-//        //jtTabla.setModel(modelo);
     }//GEN-LAST:event_jcbMateriaActionPerformed
 
 
