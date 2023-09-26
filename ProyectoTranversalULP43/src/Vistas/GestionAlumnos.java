@@ -353,10 +353,14 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         String dniEnFor = "";
         char[] vectorDNi = ingresoDNI.toCharArray();
         listaAlumnos = abmData.listarAlumnos();
+        jLabelErrorDNI.setText("");
         for (int i = 0; i < vectorDNi.length; i++) {
 //            System.out.println(" muestro los caracteres " + vectorDNi[i]);
             dniEnFor = String.valueOf(vectorDNi[i]);
             if (!dniEnFor.toLowerCase().matches("[0-9]*")) {
+                jLabelErrorDNI.setForeground(Color.RED.darker());
+                Font miFuente = new Font("Liberation Sans", Font.BOLD, 10);
+                jLabelErrorDNI.setFont(miFuente);
                 jLabelErrorDNI.setText("No puede ingresar letras o símbolos");
                 camposInicial();
                 break;
@@ -375,13 +379,16 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
                     }
                     if (modelo.getRowCount() == 0 && ingresoDNI.length() >= 8) {
                         jbtAlumnoNuevo.setEnabled(true);
-                        jLabelErrorDNI.setText("");
+                        jLabelErrorDNI.setForeground(Color.GREEN.darker());
+                        Font miFuente = new Font("Liberation Sans", Font.BOLD, 10);
+                        jLabelErrorDNI.setFont(miFuente);
+                        jLabelErrorDNI.setText("El DNI es valido");
                     } else if (modelo.getRowCount() == 0 && ingresoDNI.length() < 8) {
                         jLabelErrorDNI.setForeground(Color.YELLOW.darker());
                         Font miFuente = new Font("Liberation Sans", Font.BOLD, 10);
                         jLabelErrorDNI.setFont(miFuente);
                         jLabelErrorDNI.setText("El DNI no existe. Complete el número para agregarlo");
-                    }
+                    } 
                 }
             }
         }
