@@ -160,8 +160,8 @@ private InscripcionData insData = new InscripcionData();
     private void armarCabecera(){
         modelo.addColumn("ID");
         modelo.addColumn("DNI");
-        modelo.addColumn("Apellido");
         modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
         jtTabla.setModel(modelo);
     }
     
