@@ -216,12 +216,13 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
     private void armarBox() {
         List<Alumno> alumnos = new ArrayList();
         AlumnoData aluData = new AlumnoData();
-        alumnos = aluData.listarAlumnos();
+        alumnos = aluData.listarAlumnosActivos();
         for (Alumno i : alumnos) {
             modeloBox.addElement(i);
         }
         ComboBox.setModel(modeloBox);
     }
+    
     
     private void armarTabla() {
         modeloTabla.addColumn("ID");

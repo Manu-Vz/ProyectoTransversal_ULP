@@ -286,12 +286,13 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
 
     private void armarBox() {
         List<Alumno> alumnos = new ArrayList();
-        alumnos = aluData.listarAlumnos();
+        alumnos = aluData.listarAlumnosActivos();
         for (Alumno i : alumnos) {
             modeloBox.addElement(i);
         }
         comboBox.setModel(modeloBox);
     }
+    
     
     public void deshabilitoBotones(){
         Inscribir.setEnabled(false);
