@@ -26,7 +26,6 @@ public class AcV {
     public boolean validarAcceso(String user,char [] clave){
         String sql="select * from usuario";
         String pass=Encry.encriptar(clave);
-        System.out.println("muestro la clave "+ pass);
         boolean valido=false;
         try {
             Statement ps=miCon.createStatement();
