@@ -1,12 +1,14 @@
+
+import Vistas.Acceso;
+import Vistas.MenuPrincipal;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 
 
-import org.mariadb.jdbc.Connection;
-import AccesoADatos.Conectar;
-import Vistas.MenuPrincipal;
+
 
 /**
  *
@@ -19,8 +21,8 @@ public class ProyectoTranversalULP {
      */
     public static void main(String[] args) {
         
-        MenuPrincipal.main(args);
-        
+        //MenuPrincipal.main(args);
+        Acceso.main(args);
     }
     
 }

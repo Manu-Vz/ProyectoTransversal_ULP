@@ -420,8 +420,10 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
             jEtiquetaFecha.setText("El campo FECHA DE NACIMIENTO no puede estar vacío");
             jDAlumnoFechaNac.requestFocus();
         } else {
-            jEtiquetaFecha.setText("");
-            jbtAlumnoAgregar.setEnabled(true);
+            if(modelo.getRowCount()==0){
+                jEtiquetaFecha.setText("");
+                jbtAlumnoAgregar.setEnabled(true);
+            }
         }
     }//GEN-LAST:event_jcbAlumnoEstadoFocusGained
 
