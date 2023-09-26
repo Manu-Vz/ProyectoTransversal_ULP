@@ -187,16 +187,27 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
                 for (int f : filas){
                     mate.setIdMateria((int) modeloTabla.getValueAt(f, 0));
                     insData.actualizarNota(alu.getIdAlumno(), mate.getIdMateria(),
-                            parseDouble((String) modeloTabla.getValueAt(f, 2)));
+                            (Double) parseDouble((String) modeloTabla.getValueAt(f, 2)));
                 }
+                
+                JOptionPane.showMessageDialog(null, "Nota/s Actualizada Correctamente");
+                
             } catch (NumberFormatException ex){
                 JOptionPane.showMessageDialog(null, "Hubo Un Error");
                 insData.actualizarNota(alu.getIdAlumno(), mate.getIdMateria(), 0.0);
-            }    
+                modeloTabla.setRowCount(0);
+                List<Inscripcion> inscripciones = new ArrayList();
+                inscripciones = insData.optenerInscripcionPorAlumno(alu.getIdAlumno());
+                for (Inscripcion i : inscripciones){
+                modeloTabla.addRow(new Object[]{i.getMateria().getIdMateria(),
+                i.getMateria().getNombre(),
+                i.getNota()+""});
+                }
+            }   
             filas.clear();
             jButton1.setEnabled(false);
             ComboBox.setEnabled(true);
-        }
+      }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked

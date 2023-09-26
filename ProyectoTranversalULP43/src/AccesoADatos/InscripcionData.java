@@ -179,9 +179,7 @@ public class InscripcionData {
             
             int filasActualizadas = ps.executeUpdate();
             
-            if (filasActualizadas > 0) {
-                JOptionPane.showMessageDialog(null, "Nota actualizada correctamente.");
-            } else {
+            if (filasActualizadas <= 0) {
                 JOptionPane.showMessageDialog(null, "No se encontraron registros para actualizar.");
             }
         } catch (SQLException ex) {
