@@ -37,6 +37,7 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
         armarBox();
         armarTabla();
         jButton1.setEnabled(false);
+        ComboBox.setSelectedIndex(-1);
     }
     
     
@@ -61,7 +62,6 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Seleccione un alumno:");
 
-        ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         ComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ComboBoxItemStateChanged(evt);
@@ -161,17 +161,19 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
 
     private void ComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBoxItemStateChanged
         // TODO add your handling code here:
-        modeloTabla.setRowCount(0);
-        InscripcionData InsData = new InscripcionData();
-        List<Inscripcion> inscripciones = new ArrayList();
-        Alumno alu = new Alumno();
-        alu = (Alumno) ComboBox.getSelectedItem();
-        inscripciones = InsData.optenerInscripcionPorAlumno(alu.getIdAlumno());
-        for (Inscripcion i : inscripciones){
-            modeloTabla.addRow(new Object[]{i.getMateria().getIdMateria(),
-                i.getMateria().getNombre(),
-                i.getNota()+""});
-        }
+        if (ComboBox.getSelectedIndex() != -1){
+            modeloTabla.setRowCount(0);
+            InscripcionData InsData = new InscripcionData();
+            List<Inscripcion> inscripciones = new ArrayList();
+            Alumno alu = new Alumno();
+            alu = (Alumno) ComboBox.getSelectedItem();
+            inscripciones = InsData.optenerInscripcionPorAlumno(alu.getIdAlumno());
+            for (Inscripcion i : inscripciones){
+                modeloTabla.addRow(new Object[]{i.getMateria().getIdMateria(),
+                    i.getMateria().getNombre(),
+                    i.getNota()+""});
+            }
+        }   
     }//GEN-LAST:event_ComboBoxItemStateChanged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

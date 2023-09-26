@@ -31,6 +31,7 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
         armarTabla();
         armarBox();
         deshabilitoBotones();
+        comboBox.setSelectedIndex(-1);
     }
 
     
@@ -112,6 +113,11 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
         });
 
         Salir.setText("Salir");
+        Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -188,37 +194,46 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void materiasCursadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_materiasCursadasActionPerformed
-        modeloTabla.setRowCount(0);
-        materiasNoCursadas.setSelected(false);
-        deshabilitoBotones();
-        List<Materia> materias = new ArrayList();
-        InscripcionData InsData = new InscripcionData();
-        Alumno alu = new Alumno();
-        alu = (Alumno) comboBox.getSelectedItem();
-        materias = InsData.OptenerMateriasCursadas(alu.getIdAlumno());
-        for (Materia m : materias){
-            modeloTabla.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnio()});
+        if (comboBox.getSelectedIndex() != -1){
+            modeloTabla.setRowCount(0);
+            Inscribir.setEnabled(false);
+            materiasNoCursadas.setSelected(false);
+            List<Materia> materias = new ArrayList();
+            InscripcionData InsData = new InscripcionData();
+            Alumno alu = new Alumno();
+            alu = (Alumno) comboBox.getSelectedItem();
+            materias = InsData.OptenerMateriasCursadas(alu.getIdAlumno());
+            for (Materia m : materias){
+                modeloTabla.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnio()});
+            }
+            anularInscripcion.setEnabled(true);
+        } else {
+            deshabilitoBotones();
         }
-        anularInscripcion.setEnabled(true);
     }//GEN-LAST:event_materiasCursadasActionPerformed
 
     private void materiasNoCursadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_materiasNoCursadasActionPerformed
-        modeloTabla.setRowCount(0);
-        materiasCursadas.setSelected(false);
-        deshabilitoBotones();
-        List<Materia> materias = new ArrayList();
-        InscripcionData InsData = new InscripcionData();
-        Alumno alu = new Alumno();
-        alu = (Alumno) comboBox.getSelectedItem();
-        materias = InsData.OptenerMateriasNoCursadas(alu.getIdAlumno());
-        for (Materia m : materias){
-            modeloTabla.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnio()});
+        if (comboBox.getSelectedIndex() != -1){
+            modeloTabla.setRowCount(0);
+            anularInscripcion.setEnabled(false);
+            materiasCursadas.setSelected(false);
+            List<Materia> materias = new ArrayList();
+            InscripcionData InsData = new InscripcionData();
+            Alumno alu = new Alumno();
+            alu = (Alumno) comboBox.getSelectedItem();
+            materias = InsData.OptenerMateriasNoCursadas(alu.getIdAlumno());
+            for (Materia m : materias){
+                modeloTabla.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnio()});
+            }
+            Inscribir.setEnabled(true);
+        } else {
+            deshabilitoBotones();
         }
-        Inscribir.setEnabled(true);
     }//GEN-LAST:event_materiasNoCursadasActionPerformed
 
     private void comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxActionPerformed
         // TODO add your handling code here:
+        deshabilitoBotones();
         modeloTabla.setRowCount(0);
         anularInscripcion.setSelected(false);
         Inscribir.setSelected(false);
@@ -260,6 +275,11 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_InscribirActionPerformed
 
+    private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_SalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Inscribir;
@@ -295,6 +315,8 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
     
     
     public void deshabilitoBotones(){
+        materiasCursadas.setSelected(false);
+        materiasNoCursadas.setSelected(false);
         Inscribir.setEnabled(false);
         anularInscripcion.setEnabled(false);
     }
