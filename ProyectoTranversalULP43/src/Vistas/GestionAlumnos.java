@@ -73,7 +73,6 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         jcbAlumnoEstado = new javax.swing.JComboBox<>();
         jbtAlumnoAgregar = new javax.swing.JButton();
         jbtAlumnoModificar = new javax.swing.JButton();
-        jbtAlumnoBaja = new javax.swing.JButton();
         jbtAlumnoCancelar = new javax.swing.JButton();
         jEtiquetaNom = new javax.swing.JLabel();
         jEtiquetaApe = new javax.swing.JLabel();
@@ -177,8 +176,6 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
             }
         });
 
-        jbtAlumnoBaja.setText("Baja");
-
         jbtAlumnoCancelar.setText("Cancelar");
         jbtAlumnoCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,12 +227,10 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jcbAlumnoEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(178, 178, 178)
+                                .addGap(268, 268, 268)
                                 .addComponent(jbtAlumnoAgregar)
                                 .addGap(18, 18, 18)
                                 .addComponent(jbtAlumnoModificar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbtAlumnoBaja)
                                 .addGap(18, 18, 18)
                                 .addComponent(jbtAlumnoCancelar))))
                     .addGroup(layout.createSequentialGroup()
@@ -307,7 +302,6 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtAlumnoAgregar)
                     .addComponent(jbtAlumnoModificar)
-                    .addComponent(jbtAlumnoBaja)
                     .addComponent(jbtAlumnoCancelar))
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -359,7 +353,6 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         String dniEnFor = "";
         char[] vectorDNi = ingresoDNI.toCharArray();
         listaAlumnos = abmData.listarAlumnos();
-        //int cantidad = ingresoDNI.length();
         for (int i = 0; i < vectorDNi.length; i++) {
 //            System.out.println(" muestro los caracteres " + vectorDNi[i]);
             dniEnFor = String.valueOf(vectorDNi[i]);
@@ -423,9 +416,6 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
 
     private void jcbAlumnoEstadoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jcbAlumnoEstadoFocusGained
         // chequeo que el campo anterior (fecha de nacimiento) no este vacío
-//        System.out.println(" sin formatear "+jDAlumnoFechaNac.getCalendar());
-//        Date aver=jDAlumnoFechaNac.getDate();
-//        System.out.println("que viene "+aver);
         if (jDAlumnoFechaNac.getCalendar() == null) {
             jEtiquetaFecha.setText("El campo FECHA DE NACIMIENTO no puede estar vacío");
             jDAlumnoFechaNac.requestFocus();
@@ -442,9 +432,7 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         Date fecha = jDAlumnoFechaNac.getDate();
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         String valor = formato.format(fecha);
-        //System.out.println("muestro "+valor);
         LocalDate castFecha = LocalDate.parse(valor);
-        //System.out.println("muestro el local date "+castFecha);
         int valorCombo = jcbAlumnoEstado.getSelectedIndex();
         boolean activo = false;
         if (valorCombo == 0) {
@@ -495,7 +483,6 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
             String tomoFecha = String.valueOf(modelo.getValueAt(valor, 3));
             String tomoDNI = String.valueOf(modelo.getValueAt(valor, 4));
             String tomoEstado = String.valueOf(modelo.getValueAt(valor, 5));
-            //System.out.println("Muestro fecha "+tomoFecha);
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
             Date castFecha = formato.parse(tomoFecha);
             jLabelAlumnoID.setText(tomoID);
@@ -547,7 +534,6 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabelErrorDNI;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtAlumnoAgregar;
-    private javax.swing.JButton jbtAlumnoBaja;
     private javax.swing.JButton jbtAlumnoCancelar;
     private javax.swing.JButton jbtAlumnoModificar;
     private javax.swing.JButton jbtAlumnoNuevo;
@@ -566,7 +552,7 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         jcbAlumnoEstado.setEnabled(false);
         jbtAlumnoAgregar.setEnabled(false);
         jbtAlumnoModificar.setEnabled(false);
-        jbtAlumnoBaja.setEnabled(false);
+       
         jtAlumnoDNI.requestFocus();
     }
 

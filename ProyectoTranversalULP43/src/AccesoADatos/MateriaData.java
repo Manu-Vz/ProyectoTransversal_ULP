@@ -85,8 +85,10 @@ public class MateriaData {
             ps.setBoolean(3, materia.isEstado());
             ps.setInt(4, materia.getIdMateria());
             
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()){
+            int valor=ps.executeUpdate();
+            
+            //ResultSet rs = ps.getGeneratedKeys();
+            if (valor>0){
                 JOptionPane.showMessageDialog(null, "Se modifico Correctamente");
             }
                       
