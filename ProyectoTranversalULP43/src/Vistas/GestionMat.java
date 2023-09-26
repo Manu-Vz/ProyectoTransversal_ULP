@@ -412,6 +412,7 @@ public class GestionMat extends javax.swing.JInternalFrame {
     private void campoInicial(){
         jtMateriaAnio.setEnabled(false);
         jtMateriaAnio.setText("");
+        jEtiquetaCodigo.setText("");
         jcbMateriaEstado.setEnabled(false);
         jbtModificar.setEnabled(false);
         jbtNuevaMateria.setEnabled(false);
