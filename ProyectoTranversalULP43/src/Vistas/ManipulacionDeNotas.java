@@ -183,11 +183,16 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
             Materia mate = new Materia();
             Alumno alu = new Alumno();
             alu = (Alumno) ComboBox.getSelectedItem();
-            for (int f : filas){
-                mate.setIdMateria((int) modeloTabla.getValueAt(f, 0));
-                insData.actualizarNota(alu.getIdAlumno(), mate.getIdMateria(),
-                        parseDouble((String) modeloTabla.getValueAt(f, 2)));
-            }
+            try {
+                for (int f : filas){
+                    mate.setIdMateria((int) modeloTabla.getValueAt(f, 0));
+                    insData.actualizarNota(alu.getIdAlumno(), mate.getIdMateria(),
+                            parseDouble((String) modeloTabla.getValueAt(f, 2)));
+                }
+            } catch (NumberFormatException ex){
+                JOptionPane.showMessageDialog(null, "Hubo Un Error");
+                insData.actualizarNota(alu.getIdAlumno(), mate.getIdMateria(), 0.0);
+            }    
             filas.clear();
             jButton1.setEnabled(false);
             ComboBox.setEnabled(true);
