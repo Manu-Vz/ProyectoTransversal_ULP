@@ -348,6 +348,7 @@ public class GestionMat extends javax.swing.JInternalFrame {
         jtBuscar.setEnabled(true);
         editar = false;
         jtBuscar.requestFocus();
+        jtBuscar.selectAll();
     }//GEN-LAST:event_jbtModificarActionPerformed
 
     private void jbtAgregoMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAgregoMatActionPerformed
@@ -362,7 +363,6 @@ public class GestionMat extends javax.swing.JInternalFrame {
             temp.setEstado(false);
         }
         abmMateria.guardarMateria(temp);
-        System.out.println("a ver si tengo el id " + temp.getIdMateria());
         armoFilas();
         //borroFilas();
         campoInicial();
@@ -398,6 +398,7 @@ public class GestionMat extends javax.swing.JInternalFrame {
                     jEtiquetaAnio.setForeground(Color.red.darker());
                     jEtiquetaAnio.setText("Solo números de 0 a 9");
                     jcbMateriaEstado.setEnabled(false);
+                    jbtModificar.setEnabled(false);
                     break;
                 } else {
                     jEtiquetaAnio.setVisible(false);
