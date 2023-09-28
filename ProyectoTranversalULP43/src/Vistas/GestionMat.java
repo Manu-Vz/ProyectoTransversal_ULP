@@ -403,11 +403,15 @@ public class GestionMat extends javax.swing.JInternalFrame {
                 } else {
                     jEtiquetaAnio.setVisible(false);
                     jcbMateriaEstado.setEnabled(true);
+                    jbtModificar.setEnabled(true);
                 }
             }
         }
     }//GEN-LAST:event_jtMateriaAnioKeyReleased
 
+    public void funcionSinSentido(){
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Codigo;
