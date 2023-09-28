@@ -142,12 +142,10 @@ private InscripcionData insData = new InscripcionData();
         
             materia = (Materia) jcbMateria.getSelectedItem();
             alumnos = insData.obtenerAlumnosXmateria(materia.getIdMateria());
-            System.out.println("Aca muestro el id " + materia);
         
         
             for (Alumno alu : alumnos) {
             
-            System.out.println("aca muestro el nombre " + alu.getNombre());
             modelo.addRow(new Object[]{alu.getIdAlumno(),alu.getDni(),alu.getNombre(),alu.getApellido()});
             
             } 
